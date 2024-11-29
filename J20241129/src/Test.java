@@ -1,7 +1,38 @@
+import java.util.Random;
 import java.util.Scanner;//导包
 public class Test {
     public static void main(String[] args) {
-        for (int i = 0; i < 10; i++) {
+        Random random = new Random();
+        int randNum = random.nextInt(bound:100);
+        Scanner scaner = new Scanner(System.in);
+        while(true) {
+            System.out.println();
+        }
+    }
+    public static void main7(String[] args) {
+        Scanner scaner = new Scanner(System.in);
+
+        while(scaner.hasNextInt()) {
+            int a = scaner.nextInt();
+            System.out.println(a);
+        }
+
+    }
+    public static void main16(String[] args) {
+        Scanner scaner = new Scanner(System.in);
+
+        System.out.println("请输入年龄");
+        int age = scaner.nextInt();
+        System.out.println(age);
+
+        scaner.nextLine();
+
+        System.out.println("清输入姓名");
+        String name = scaner.nextLine();
+        System.out.println(name);
+
+
+       /* for (int i = 0; i < 10; i++) {
             System.out.println(i);
         }
     }
@@ -14,7 +45,7 @@ public class Test {
            }
             System.out.println(i);
            i++;
-        }
+        }*/
 
 
        /* int x = 10;
