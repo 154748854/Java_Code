@@ -9,7 +9,6 @@ public class Demo7 {
             }
             System.out.println("线程结束");
         });
-
         t.start();
         System.out.println(t.isAlive());
         try {
