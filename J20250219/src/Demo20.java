@@ -13,7 +13,6 @@ public class Demo20 {
                 System.out.println("wait之后");
             }
         });
-
         Thread t2 = new Thread(() -> {
             try {
                 Thread.sleep(3000);
