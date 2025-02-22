@@ -12,7 +12,6 @@ class SingletonLazy {
         }
         return instance;
     }
-
     private SingletonLazy() {};
 }
 public class Demo22 {
