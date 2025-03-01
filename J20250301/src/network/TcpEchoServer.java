@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class TcpEchoServer {
     private ServerSocket serverSocket = null;
@@ -17,11 +19,29 @@ public class TcpEchoServer {
 
     public void start() throws IOException {
         System.out.println("服务器启动");
+        ExecutorService service = Executors.newCachedThreadPool();
         while (true) {
             // 通过 accept 方法,把内核中已经建立好的连接拿到应用程序中
             // 建立连接的细节都是系统内核自动完成的,应用程序只需要"捡现成"的
             Socket clientSocket = serverSocket.accept();
-            processConnection(clientSocket);
+            // 此处不应该直接调用 processConnection,会导致服务器不能处理多个客户端
+            // 创建新的线程来调用更合理的做法.
+            /*
+            Thread t = new Thread(() -> {
+               processConnection(clientSocket);
+            });
+            t.start();
+            // processConnection(clientSocket);
+            这种做法可行,但是不够好
+             */
+            // 更好 一点 的办法是使用线程池.
+            // 线程池的方式是可以降低"频繁创建销毁
+            service.submit(new Runnable() {
+                @Override
+                public void run() {
+                    processConnection(clientSocket);
+                }
+            });
         }
     }
 
