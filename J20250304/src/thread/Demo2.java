@@ -1,6 +1,6 @@
 package thread;
 
-class MyThread extends Thread {
+class MyRunnable implements Runnable {
     @Override
     public void run() {
         while (true) {
@@ -8,9 +8,10 @@ class MyThread extends Thread {
         }
     }
 }
-public class Demo1 {
+public class Demo2 {
     public static void main(String[] args) {
-        Thread t1 = new MyThread();
-        t1.start();
+        Runnable runnable = new MyRunnable();
+        Thread t = new Thread(runnable);
+        t.start();
     }
 }
