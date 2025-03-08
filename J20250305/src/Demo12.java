@@ -24,7 +24,6 @@ public class Demo12 {
         // 我们预期的结果是10W,但是实际上的结果一般是小于10W的
         // 并且每次执行的结果都不一样
         System.out.println("count:"+count);
-
     }
     public static void main1(String[] args) throws InterruptedException {
         Thread t = new Thread(() -> {
