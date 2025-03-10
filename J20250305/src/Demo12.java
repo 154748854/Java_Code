@@ -17,6 +17,7 @@ public class Demo12 {
         t1.start();
         t2.start();
 
+
         t1.join();
         t2.join();
         // 等待两个线程全部执行完毕
