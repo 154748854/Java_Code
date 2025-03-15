@@ -8,7 +8,6 @@ class SingletonLazy {
             }
         }
         return instance;
-
     }
 }
 public class Demo22 {
