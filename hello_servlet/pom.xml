@@ -24,7 +24,6 @@
         </dependency>
 
     </dependencies>
-
     <packaging>war</packaging>
     <build>
         <finalName>java</finalName>
