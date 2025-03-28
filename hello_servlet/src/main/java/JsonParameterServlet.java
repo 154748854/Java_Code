@@ -15,6 +15,7 @@ class Request {
 class Response {
     public boolean ok;
 }
+
 @WebServlet("/json")
 public class JsonParameterServlet extends HttpServlet {
     @Override
