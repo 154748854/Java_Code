@@ -89,7 +89,6 @@ public class ParamController {
         }
         return "session为空";
     }
-
     @RequestMapping("/getSession2")
     public String getSession2(@SessionAttribute(required = false) String username) {
         return "username"+username;
