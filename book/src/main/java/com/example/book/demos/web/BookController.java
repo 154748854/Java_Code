@@ -43,6 +43,7 @@ public class BookController {
             bookInfo.setPublish("出版社"+i);
             bookInfo.setStatus(i%5==0?2:1);
             bookInfos.add(bookInfo);
+
         }
         return bookInfos;
     }
