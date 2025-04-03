@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,5 +47,18 @@ public class ReturnController {
         return kv;
     }
 
+    @ResponseBody
+    @RequestMapping("/setStatus")
+    public String setStatus(HttpServletResponse response) {
+        response.setStatus(401);
+        return "设置状态码";
+    }
 
+    @ResponseBody
+    @RequestMapping(value = "/r1", produces = "application/json;charset=utf8")
+    public String r1(HttpServletResponse response) {
+        // 设置状态码
+        response.setHeader("myheader","myheader");
+        return "{'OK':1}";
+    }
 }
