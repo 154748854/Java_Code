@@ -27,6 +27,7 @@ public class BookController {
         }
         return bookInfos;
     }
+
     private List<BookInfo> mockData() {
         // 优化的小Tip:
         // 对于已知的数据量,或者大概知道这个集合的数据量时,创建List事,建议指定初始值
