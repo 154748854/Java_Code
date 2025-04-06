@@ -34,8 +34,24 @@
     <script>
 
         function login() {
-            location.href = "book_list.html";
+            $.ajax({
+                url: "/user/login",
+                type: "post",
+                data: {
+                    "userName": $("#userName").val(),
+                    "password": $("#password").val()
+                },
+                success: function (result) {
+                    if (result) {
+                        location.href = "book_list.html";
+                    } else {
+                        alert("错误");
+                    }
+                }
+            });
+
         }
+
 
 
     </script>

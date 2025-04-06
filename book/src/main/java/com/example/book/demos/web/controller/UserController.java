@@ -1,4 +1,4 @@
-package com.example.book.demos.web;
+package com.example.book.demos.web.controller;
 
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
