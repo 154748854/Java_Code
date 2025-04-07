@@ -1,12 +1,14 @@
 package com.example.book.demos.web.dao;
 
 import com.example.book.demos.web.model.BookInfo;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@Component
 public class BookDao {
 
     public List<BookInfo> mockData() {

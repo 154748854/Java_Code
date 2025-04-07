@@ -2,11 +2,16 @@ package com.example.book.demos.web.service;
 
 import com.example.book.demos.web.dao.BookDao;
 import com.example.book.demos.web.model.BookInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
+// 这个注解告诉Spring帮我们存一个对象
 public class BookService {
-    private BookDao bookDao = new BookDao();
+    @Autowired
+    private BookDao bookDao;
     public List<BookInfo> getBookList() {
         List<BookInfo> bookInfos = bookDao.mockData();
         // mock 表示的是虚拟的假数据, 是一个专业术语
