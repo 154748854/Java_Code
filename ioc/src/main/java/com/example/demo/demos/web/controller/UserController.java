@@ -4,7 +4,10 @@ import com.example.demo.demos.web.User;
 import com.example.demo.demos.web.config.UserInfo;
 import com.example.demo.demos.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+
+import javax.annotation.Resource;
 
 @Controller
 public class UserController {
@@ -15,8 +18,16 @@ public class UserController {
 //    private UserService userService;
 
     // 构造方法注入
+    @Autowired
     private UserService us;
-//    private UserInfo userInfo;
+
+
+    // @Qualifier("userInfo2")
+    // @Autowired
+
+    // 使用@Resource指定Bean
+    @Resource(name = "userInfo2")
+    private UserInfo userInfo;
 //
 //    public UserController(UserService userService, UserInfo userInfo) {
 //        this.userService = userService;
@@ -36,5 +47,7 @@ public class UserController {
     public void doController() {
         us.doService();
         System.out.println("do Controller");
+        System.out.println(userInfo);
     }
+
 }
