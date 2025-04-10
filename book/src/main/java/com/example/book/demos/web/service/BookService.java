@@ -4,10 +4,11 @@ import com.example.book.demos.web.dao.BookDao;
 import com.example.book.demos.web.model.BookInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 // 这个注解告诉Spring帮我们存一个对象
 public class BookService {
     @Autowired
