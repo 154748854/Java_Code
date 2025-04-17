@@ -11,7 +11,7 @@ public class UserInfo {
     private String password;
     private Integer age;
     private Integer gender;
-    private String phono;
+    private String phone;
     private Integer deleteFlag;
     private Date createTime;
     private Date updateTime;
