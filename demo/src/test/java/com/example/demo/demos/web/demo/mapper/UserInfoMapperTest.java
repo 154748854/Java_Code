@@ -44,4 +44,17 @@ class UserInfoMapperTest {
     void selectOne2() {
         log.info(userInfoMapper.selectOne2(1).toString());
     }
+
+    @Test
+    void insert() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUsername("zhaoliu");
+        userInfo.setPassword("zhaoliu");
+        userInfo.setAge(6);
+        userInfo.setGender(0);
+        userInfo.setPhone("1234566789");
+
+        Integer result = userInfoMapper.insert(userInfo);
+        log.info("insert 结果"+result+"自增id"+userInfo.getId());
+    }
 }
