@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.demos.web.demo.mapper.UserInfoXMLMapper">
+
+    <resultMap id="XmlBaseMap" type="com.example.demo.demos.web.demo.model.UserInfo">
+        <id column="id" property="id"></id>
+        <result column="delete_flag" property="deleteFlag"></result>
+    </resultMap>
+    <select id="selectAll" resultType="com.example.demo.demos.web.demo.model.UserInfo">
+        select * from userinfo
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into userinfo (username, password, age, gender, phone)
+        values (#{username}, #{password}, #{age}, #{gender}, #{phone})
+    </insert>
+    
+    <delete id="delete">
+        delete from userinfo where id=#{id};
+    </delete>
+    
+    <update id="update">
+        update userinfo set gender = #{gender} where id = #{id};
+    </update>
+</mapper>

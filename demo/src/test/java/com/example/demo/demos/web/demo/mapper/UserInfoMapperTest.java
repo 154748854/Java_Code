@@ -35,6 +35,16 @@ class UserInfoMapperTest {
         log.info(list.toString());
     }
 
+    void selectAll2() {
+        List<UserInfo> list = userInfoMapper.selectAll2();
+        log.info(list.toString());
+    }
+
+    void selectAll3() {
+        List<UserInfo> list = userInfoMapper.selectAll3();
+        log.info(list.toString());
+    }
+
     @Test
     void selectOne() {
         log.info(userInfoMapper.selectOne(1).toString());
@@ -56,5 +66,22 @@ class UserInfoMapperTest {
 
         Integer result = userInfoMapper.insert(userInfo);
         log.info("insert 结果"+result+"自增id"+userInfo.getId());
+    }
+
+    @Test
+    void delete() {
+        userInfoMapper.delete(10);
+    }
+
+    @Test
+    void update() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setAge(8);
+        userInfo.setId(11);
+        Integer result = userInfoMapper.update(userInfo);
+        // 开发中常用影响的行数来显示修改是否成功
+        if (result > 0) {
+            log.info("数据修改成功");
+        }
     }
 }
