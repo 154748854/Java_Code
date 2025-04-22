@@ -84,4 +84,14 @@ class UserInfoMapperTest {
             log.info("数据修改成功");
         }
     }
+
+    @Test
+    void selectUserBySort() {
+        log.info(userInfoMapper.selectUserBySort("desc").toString());
+    }
+
+    @Test
+    void selectUserByLike() {
+        log.info(userInfoMapper.selectUserByLike("java").toString());
+    }
 }

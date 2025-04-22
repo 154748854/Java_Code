@@ -1,6 +1,7 @@
 package com.example.demo.demos.web.demo.mapper;
 
 import com.example.demo.demos.web.demo.model.UserInfo;
+import org.apache.catalina.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -60,5 +61,19 @@ public interface UserInfoMapper {
 
     @Update("update userinfo set age=#{age} where id=#{id}")
     Integer update(UserInfo userInfo);
+
+    /**
+     * 排序
+     * @param sort
+     * @return
+     */
+    @Select("select * from userinfo order by id ${sort}")
+    List<UserInfo> selectUserBySort(String sort);
+
+    /**
+     * 模糊查询
+     */
+    @Select("select * from userinfo where username like concat('%', #{username}, '%')")
+    List<UserInfo> selectUserByLike(String username);
 
 }

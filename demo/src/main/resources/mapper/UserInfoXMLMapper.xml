@@ -7,7 +7,7 @@
         <id column="id" property="id"></id>
         <result column="delete_flag" property="deleteFlag"></result>
     </resultMap>
-    <select id="selectAll" resultType="com.example.demo.demos.web.demo.model.UserInfo">
+    <select id="selectAll" resultType="com.example.demo.demos.web.demo.model.UserInfo" >
         select * from userinfo
     </select>
 
