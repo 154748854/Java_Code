@@ -3,17 +3,99 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.demos.web.demo.mapper.UserInfo2Mapper">
     <insert id="insertByXML">
-        insert into userinfo(username, password, age,
-                             <if test="gender!=null">
-                                 gender,
-                            </if>
-                             phone)
+        insert into userinfo(
+        <if test="username!=null">
+            username,
+        </if>
+        <if test="password!=null">
+            password,
+        </if>
+        <if test="age!=null">
+            age,
+        </if>
 
-        values(#{username},#{password},#{age},
-               <if test="gender!=null">
-                   #{gender},
-               </if>
-               #{phone})
+        <if test="gender!=null">
+            gender,
+        </if>
+            phone)
+
+        values(
+        <trim suffixOverrides=",">
+            <if test="username!=null">
+                #{username},
+            </if>
+            <if test="password!=null">
+                #{password},
+            </if>
+            <if test="age!=null">
+                #{age},
+            </if>
+
+            <if test="gender!=null">
+                #{gender},
+            </if>
+            <if test="phone!=null">#{phone}
+            </if>
+        </trim>
+        )
     </insert>
+
+    <select id="selectByCondition" resultType="com.example.demo.demos.web.demo.model.UserInfo">
+        select * from userinfo
+        where 1=1
+        <trim prefixOverrides="and">
+            <if test="username!=null">
+                username = #{username}
+            </if>
+            <if test="age!=null">
+                and age = #{age}
+            </if>
+            <if test="gender!=null">
+                and gender = #{gender}
+            </if>
+        </trim>
+
+    </select>
+
+    <select id="selectByCondition2" resultType="com.example.demo.demos.web.demo.model.UserInfo">
+        <where>
+            <if test="username!=null">
+                username = #{username}
+            </if>
+            <if test="age!=null">
+                and age = #{age}
+            </if>
+            <if test="gender!=null">
+                and gender = #{gender}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateByCondition">
+        update userinfo
+        <set>
+            <if test="username!=null">
+                username = #{username},
+            </if>
+            <if test="age!=null">
+                age = #{age},
+            </if>
+            <if test="gender!=null">
+                gender = #{gender},
+            </if>
+            <where>
+                id = 30
+            </where>
+        </set>
+
+    </update>
+
+    <delete id="batchDelete">
+        delete from userinfo
+        where id in
+        <foreach collection="ids" separator="," item="id" open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

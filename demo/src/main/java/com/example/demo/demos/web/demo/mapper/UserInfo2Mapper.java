@@ -4,6 +4,8 @@ import com.example.demo.demos.web.demo.model.UserInfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 
 /**
  * 动态sql
@@ -21,4 +23,13 @@ public interface UserInfo2Mapper {
     Integer insert(UserInfo userInfo);
 
     Integer insertByXML(UserInfo userInfo);
+
+    List<UserInfo> selectByCondition(UserInfo userInfo);
+    List<UserInfo> selectByCondition2(UserInfo userInfo);
+
+
+    List<UserInfo> updateByCondition(UserInfo userInfo);
+
+    List<UserInfo> batchDelete(List<Integer> ids);
+
 }
