@@ -33,8 +33,8 @@ public class MessageController {
 
    }
 
-//   @RequestMapping("/getMessageInfo")
-//   public List<MessageInfo> getMessageInfo() {
-//        return messageInfos;
-//   }
+   @RequestMapping("/getMessageInfo")
+   public List<MessageInfo> getMessageInfo() {
+        return messageService.getMessageInfo();
+   }
 }
