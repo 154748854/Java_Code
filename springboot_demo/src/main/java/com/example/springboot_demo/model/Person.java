@@ -1,4 +1,4 @@
-package com.example.springboot_demo.controller;
+package com.example.springboot_demo.model;
 
 public class Person {
     String name;

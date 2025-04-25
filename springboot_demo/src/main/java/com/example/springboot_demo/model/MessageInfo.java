@@ -1,4 +1,4 @@
-package com.example.springboot_demo.controller;
+package com.example.springboot_demo.model;
 
 import lombok.Data;
 import lombok.Getter;
@@ -8,14 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
-@ToString
+@Data
 public class MessageInfo {
-    @Getter @Setter
+    private Integer id;
     private String from;
-    @Getter @Setter
     private String to;
-    @Getter @Setter
     private String message;
+    private Integer deleteFlag;
+    private Date createTime;
+    private Date updateTime;
 
 
 }

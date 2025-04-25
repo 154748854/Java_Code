@@ -1,6 +1,8 @@
 package com.example.springboot_demo.controller;
 
-import com.sun.deploy.util.ArrayUtil;
+import com.example.springboot_demo.model.MessageInfo;
+import com.example.springboot_demo.service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,8 +13,10 @@ import java.util.List;
 @RestController
 public class MessageController {
     // 这个对象是在内存中的,所以它的数据也是在内存中的
-    private List<MessageInfo> messageInfos = new ArrayList<>();
+    // private List<MessageInfo> messageInfos = new ArrayList<>();
 
+    @Autowired
+    private MessageService messageService;
 
     @RequestMapping("/publish")
    public Boolean publishMessage(MessageInfo messageInfo) {
@@ -22,14 +26,15 @@ public class MessageController {
         || !StringUtils.hasLength(messageInfo.getFrom())) {
             return false;
         }
+
         // 添加留言
-        messageInfos.add(messageInfo);
+        messageService.addMessage(messageInfo);
         return true;
 
    }
 
-   @RequestMapping("/getMessageInfo")
-   public List<MessageInfo> getMessageInfo() {
-        return messageInfos;
-   }
+//   @RequestMapping("/getMessageInfo")
+//   public List<MessageInfo> getMessageInfo() {
+//        return messageInfos;
+//   }
 }
