@@ -1,16 +1,17 @@
 package com.example.book.demos.web.controller;
 
 import com.example.book.demos.web.model.BookInfo;
+import com.example.book.demos.web.model.PageRequest;
+import com.example.book.demos.web.model.PageResult;
 import com.example.book.demos.web.service.BookService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
+@Slf4j
 @RequestMapping("/book")
 @RestController
 public class BookController {
@@ -18,14 +19,19 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+    @RequestMapping("/getBookListByPage")
+    public PageResult<BookInfo> getBookListByPage(PageRequest pageRequest) {
+        log.info("查询翻页信息, pageRequest:{}", pageRequest);
 
-    @RequestMapping("/getBookList")
-    public List<BookInfo> getBookList() {
-        // 1. 获取图书的数据
-        // 2. 对图书的数据进行处理
-        // 3. 返回数据
-        List<BookInfo> bookInfos = bookService.getBookList();
-        return bookInfos;
+        if (pageRequest.getCurrentPage()<1 || pageRequest.getPageSize()<0) {
+            return null;
+        }
+        PageResult<BookInfo> bookInfoPageResult = null;
+        try {
+            bookInfoPageResult = bookService.selectBookInfoByPage(pageRequest);
+        }catch (Exception e) {
+            log.error("查询翻页信息错误,e:{}",e);
+        }
+        return bookInfoPageResult;
     }
-
 }

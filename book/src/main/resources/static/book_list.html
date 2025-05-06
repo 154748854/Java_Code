@@ -54,10 +54,10 @@
             function getBookList() {
                 $.ajax({
                     type:"get",
-                    url:"/book/getBookList",
-                    success:function(books){
+                    url:"/book/getBookListByPage"+location.search,
+                    success:function(result) {
                         var finalHtml = "";
-                        for(var book of books) {
+                        for(var book of result.records) {
                             finalHtml += '<tr>';
                             finalHtml += '<td><input type="checkbox" name="selectBook" value="'+book.id+'" id="selectBook" class="book-select"></td>';    
                             finalHtml += '<td>'+book.id+'</td>';
@@ -73,7 +73,7 @@
                             finalHtml += '<a href="javascript:void(0)" onclick="deleteBook('+book.id+')">删除</a>';
                             finalHtml += '</div></td></tr>';
                         }
-                        console.log(finalHtml);
+                        
                         $("tbody").html(finalHtml);
                     }
                 });
@@ -93,6 +93,10 @@
                 //页面初始化和页码点击时都会执行
                 onPageChange: function (page, type) {
                     console.log("第" + page + "页, 类型:" + type);
+                    if(type == "change") {
+                        location.href = "book_list.hrml?currentPage="+page;
+                    }
+                    
                 }
             });
             function deleteBook(id) {
