@@ -25,7 +25,6 @@ public class BookService {
 
         // 获取当前记录数
         List<BookInfo> bookInfos = bookInfoMapper.selectUserByPage(pageRequest.getOffset(), pageRequest.getPageSize());
-
         return new PageResult<>(bookInfos,count,pageRequest);
     }
 
