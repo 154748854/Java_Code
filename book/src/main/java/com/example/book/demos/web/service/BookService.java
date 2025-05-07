@@ -20,6 +20,7 @@ public class BookService {
         if (pageRequest == null) {
             return null;
         }
+
         // 获取总信息数
         Integer count = bookInfoMapper.count();
 
