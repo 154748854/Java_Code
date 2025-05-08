@@ -34,4 +34,11 @@ public class BookController {
         }
         return bookInfoPageResult;
     }
+
+    @RequestMapping("/addBook")
+    public String addBook(BookInfo bookInfo) {
+        // 参数校验
+        if ()
+        bookService.addBook(bookInfo);
+    }
 }
