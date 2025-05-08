@@ -30,4 +30,11 @@ public interface BookInfoMapper {
     @Insert("insert into book_info (book_name, author, count, price, publish, status) " +
             "values(#{bookName}, #{author}, {count}, #{price}, #{publish}, #{status})")
     Integer insertBook(BookInfo bookInfo);
+
+
+    @Select("select * from book_info where id = #{id}")
+    BookInfo queryBookInfoById(Integer id);
+
+
+    Integer updateBook(BookInfo bookInfo);
 }

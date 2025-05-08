@@ -48,13 +48,28 @@ public class BookService {
         Integer result = 0;
         try {
             result = bookInfoMapper.insertBook(bookInfo);
-            if (result <=0) {
-                log.error("添加图书出错:bookInfo:{}",bookInfo);
-            }
         }catch (Exception e) {
             log.error("添加图书出错,e:{}",e);
         }
         return result;
     }
 
+    public BookInfo queryBookInfoById(Integer id) {
+        return bookInfoMapper.queryBookInfoById(id);
+    }
+
+    /**
+     * 更新图示
+     * @param bookInfo
+     * @return
+     */
+    public Integer updateBook(BookInfo bookInfo) {
+        Integer result = 0;
+        try {
+            result = bookInfoMapper.updateBook(bookInfo);
+        }catch (Exception e) {
+            log.error("更新图示失败,e:{}",e);
+        }
+        return result;
+    }
 }
