@@ -16,10 +16,7 @@ public class PageResult<T> {
      */
     private Integer total;
 
-    /**
-     * 状态码.表示后端是否正常相应了
-     */
-    private Integer code; // 200 成功  -1 失败
+
 
     private PageRequest pageRequest;
 

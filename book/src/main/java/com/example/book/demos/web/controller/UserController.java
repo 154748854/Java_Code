@@ -1,5 +1,6 @@
 package com.example.book.demos.web.controller;
 
+import com.example.book.demos.web.constant.Constants;
 import com.example.book.demos.web.mapper.UserInfoMapper;
 import com.example.book.demos.web.model.UserInfo;
 import com.example.book.demos.web.service.UserService;
@@ -33,7 +34,7 @@ public class UserController {
             // 账号密码正确
             // 存session
             userInfo.setPassword("");
-            session.setAttribute("username",userInfo);
+            session.setAttribute(Constants.SESSION_USER_KEY,userInfo);
             return true;
         }
 

@@ -56,8 +56,14 @@
                     type:"get",
                     url:"/book/getBookListByPage"+location.search,
                     success:function(result) {
+                        if (result.code=="UNLOGIN") {
+                            location.href = "login.html";
+                            return;
+                        }
                         var finalHtml = "";
-                        for(var book of result.records) {
+                        // 加载列表
+                        var PageResult = result.data;
+                        for(var book of PageResult.records) {
                             finalHtml += '<tr>';
                             finalHtml += '<td><input type="checkbox" name="selectBook" value="'+book.id+'" id="selectBook" class="book-select"></td>';    
                             finalHtml += '<td>'+book.id+'</td>';
@@ -139,6 +145,8 @@
                             if(result=="") {
                                 // 删除成功
                                 location.href = "book_list.html";
+                            }else {
+                                alert(result);
                             }
                         }
                     });

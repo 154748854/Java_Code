@@ -1,9 +1,10 @@
 package com.example.book.demos.web.controller;
 
+import com.example.book.demos.web.constant.Constants;
+import com.example.book.demos.web.enums.ResultCode;
 import com.example.book.demos.web.mapper.BookInfoMapper;
-import com.example.book.demos.web.model.BookInfo;
-import com.example.book.demos.web.model.PageRequest;
-import com.example.book.demos.web.model.PageResult;
+import com.example.book.demos.web.mapper.UserInfoMapper;
+import com.example.book.demos.web.model.*;
 import com.example.book.demos.web.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.awt.print.Book;
 import java.util.List;
 
@@ -24,20 +26,28 @@ public class BookController {
     private BookService bookService;
 
     @RequestMapping("/getBookListByPage")
-    public PageResult<BookInfo> getBookListByPage(PageRequest pageRequest) {
+    public Result getBookListByPage(PageRequest pageRequest, HttpSession session) {
         log.info("查询翻页信息, pageRequest:{}", pageRequest);
-
+        // 用户登录校验
+        UserInfo userInfo = (UserInfo) session.getAttribute(Constants.SESSION_USER_KEY);
+        if (userInfo==null || userInfo.getId()<=0 || "".equals(userInfo.getUserName())) {
+            // 用户未登录
+            return Result.unlogin();
+        }
+        // 校验成功
         if (pageRequest.getCurrentPage()<1 || pageRequest.getPageSize()<0) {
-            return null;
+            return Result.fail("参数校验失败");
         }
         PageResult<BookInfo> bookInfoPageResult = null;
         try {
             bookInfoPageResult = bookService.selectBookInfoByPage(pageRequest);
+            return Result.success(bookInfoPageResult);
         }catch (Exception e) {
             log.error("查询翻页信息错误,e:{}",e);
+            return Result.fail(e.getMessage());
         }
-        return bookInfoPageResult;
     }
+
 
     @RequestMapping("/addBook")
     public String addBook(BookInfo bookInfo) {
@@ -62,6 +72,8 @@ public class BookController {
     @RequestMapping("/queryBookInfoById")
     public BookInfo queryBookInfoById(Integer bookId) {
         log.info("根据Id查询图书");
+
+        // 校验成功
         try {
             BookInfo bookInfo = bookService.queryBookInfoById(bookId);
             return bookInfo;
