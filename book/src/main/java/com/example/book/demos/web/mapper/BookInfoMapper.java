@@ -37,4 +37,6 @@ public interface BookInfoMapper {
 
 
     Integer updateBook(BookInfo bookInfo);
+
+    Integer batchDelete(List<Integer> ids);
 }

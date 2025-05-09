@@ -72,4 +72,14 @@ public class BookService {
         }
         return result;
     }
+
+    public Integer batchDelete(List<Integer> ids) {
+        Integer result = 0;
+        try {
+            result = bookInfoMapper.batchDelete(ids);
+        }catch (Exception e) {
+            log.error("批量删除失败,ids:{}",ids);
+        }
+        return result;
+    }
 }

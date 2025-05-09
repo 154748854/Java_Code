@@ -99,11 +99,27 @@
                     
                 }
             });
-            function deleteBook(id) {
+            function deleteBook(bookId) {
                 var isDelete = confirm("确认删除?");
                 if (isDelete) {
                     //删除图书
-                    alert("删除成功");
+                    $.ajax({
+                        type:"post",
+                        url:"/book/updateBook",
+                        data:{
+                            id: bookId,
+                            status: 0
+                        },
+                        success:function(result) {
+                            if (result=="") {
+                                //
+                                location.href = "book_list.html";
+                            }else {
+                                alert(result);
+                            }
+                        }
+
+                    });
                 }
             }
             function batchDelete() {
@@ -115,7 +131,17 @@
                         ids.push($(this).val());
                     });
                     console.log(ids);
-                    alert("批量删除成功");
+
+                    $.ajax({
+                        type:"post",
+                        url:"/book/batchDelete?ids="+ids,
+                        success:function(result){
+                            if(result=="") {
+                                // 删除成功
+                                location.href = "book_list.html";
+                            }
+                        }
+                    });
                 }
             }
 
