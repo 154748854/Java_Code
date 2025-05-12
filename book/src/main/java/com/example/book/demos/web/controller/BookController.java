@@ -29,11 +29,11 @@ public class BookController {
     public Result getBookListByPage(PageRequest pageRequest, HttpSession session) {
         log.info("查询翻页信息, pageRequest:{}", pageRequest);
         // 用户登录校验
-        UserInfo userInfo = (UserInfo) session.getAttribute(Constants.SESSION_USER_KEY);
-        if (userInfo==null || userInfo.getId()<=0 || "".equals(userInfo.getUserName())) {
-            // 用户未登录
-            return Result.unlogin();
-        }
+//        UserInfo userInfo = (UserInfo) session.getAttribute(Constants.SESSION_USER_KEY);
+//        if (userInfo==null || userInfo.getId()<=0 || "".equals(userInfo.getUserName())) {
+//            // 用户未登录
+//            return Result.unlogin();
+//        }
         // 校验成功
         if (pageRequest.getCurrentPage()<1 || pageRequest.getPageSize()<0) {
             return Result.fail("参数校验失败");
