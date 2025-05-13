@@ -19,6 +19,7 @@ public class ResponseAdvice implements ResponseBodyAdvice {
     public boolean supports(MethodParameter returnType, Class converterType) {
         return false;
     }
+    // 如果是true 表示对结果进行处理
 
     @SneakyThrows
     @Override

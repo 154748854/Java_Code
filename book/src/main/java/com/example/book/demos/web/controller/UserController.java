@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     private UserService userService;
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login", produces = "application/json")
     public Boolean login(String userName, String password, HttpSession session) {
         // 1. 校验参数
         if (!StringUtils.hasLength(userName) || !StringUtils.hasLength(password)) {
