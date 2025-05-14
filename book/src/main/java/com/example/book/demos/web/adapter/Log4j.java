@@ -1,4 +1,4 @@
-package com.example.book.adapter;
+package com.example.book.demos.web.adapter;
 
 public class Log4j {
     public void log4jPrint(String message) {

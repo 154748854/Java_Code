@@ -1,4 +1,4 @@
-package com.example.book.adapter;
+package com.example.book.demos.web.adapter;
 
 
 

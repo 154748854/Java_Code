@@ -1,4 +1,4 @@
-package com.example.book.adapter;
+package com.example.book.demos.web.adapter;
 
 public class Log4jAdapter implements Sl4jLog {
     private Log4j log4j;
