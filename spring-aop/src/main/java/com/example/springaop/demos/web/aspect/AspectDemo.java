@@ -25,7 +25,7 @@ public class AspectDemo {
 
     @Around("pt()")
     public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        log.info("do around before...");
+        log.info("AspectDemo do around before...");
         Object result = joinPoint.proceed();
         log.info("do around after...");
         return result;
