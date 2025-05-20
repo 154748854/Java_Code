@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserInfoMapperTest {
     @Autowired
     private UserInfoMapper userInfoMapper;
+
     @Test
     void insert() {
         userInfoMapper.insert("zhangsan","123456");
