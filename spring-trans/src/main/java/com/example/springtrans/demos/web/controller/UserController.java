@@ -11,6 +11,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
     @RequestMapping("/register")
     public boolean register(String userName, String password) {
         Integer result = userService.insert(userName,password);
