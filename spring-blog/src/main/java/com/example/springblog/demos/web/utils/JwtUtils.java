@@ -1,5 +1,6 @@
 package com.example.springblog.demos.web.utils;
 
+import com.example.springblog.demos.web.constant.Constants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
@@ -12,8 +13,8 @@ import java.util.Map;
 
 @Slf4j
 public class JwtUtils {
-    private static final long JWT_EXPIRATION = 1000;
-    private static final String secretStr = "sodafoasidgolnasdabadscasdfasdksdfnoasg";
+    private static final long JWT_EXPIRATION = 60*60*1000;
+    private static final String secretStr = "sodafoasidgoQWERlnasdabadscasdfasdksdfnoasg";
     private static final Key key = Keys.hmacShaKeyFor(secretStr.getBytes());
     /**
      * 生成token
@@ -42,6 +43,18 @@ public class JwtUtils {
         }
 
         return claims;
+    }
+
+    public static Integer getIdByToken(String token) {
+        Claims claims = parseToken(token);
+        Integer userId = null;
+        if (claims!=null) {
+            userId = (Integer) claims.get(Constants.TOKEN_ID);
+            if (userId>0) {
+                return userId;
+            }
+        }
+        return null;
     }
 
 }

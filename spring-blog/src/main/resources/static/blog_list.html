@@ -43,6 +43,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/common.js"></script>
     <script>
+
         $.ajax({
             type: "get",
             url: "/blog/getList",
@@ -59,6 +60,11 @@
                         finalHtml +='</div>';
                     }
                     $(".container .right").html(finalHtml);
+                }
+            },
+            error:function(error) {
+                if (error!=null && error.status==401) {
+                    location.href = "blog_login.html";
                 }
             }
         });
