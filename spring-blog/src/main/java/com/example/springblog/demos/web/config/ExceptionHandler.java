@@ -15,4 +15,5 @@ public class ExceptionHandler {
         log.error("发生异常,e", e);
         return Result.fail("内部错误,请联系管理员");
     }
+
 }

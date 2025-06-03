@@ -73,8 +73,23 @@ public class UserController {
 
     }
 
-//    @RequestMapping("/getAuthorInfo")
-//    public UserInfo getAuthorInfo(Integer blogId) {
-//
-//    }
+    /**
+     * 根据博客ID,获取作者信息
+     * @param blogId
+     * @return
+     */
+    @RequestMapping("/getAuthorInfo")
+    public UserInfo getAuthorInfo(Integer blogId) {
+        // 1. 根据博客ID,获取作者Id
+        // 2, 根据作者ID,获取作者信息
+        if (blogId < 0) {
+            return null;
+        }
+        UserInfo userInfo = userService.getAuthorInfo(blogId);
+//        if (userInfo==null) {
+//            // 图书不存在或者无相关作者信息
+//            return null;
+//        }
+        return userInfo;
+    }
 }
