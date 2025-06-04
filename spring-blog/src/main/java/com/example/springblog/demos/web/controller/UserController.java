@@ -41,6 +41,7 @@ public class UserController {
             log.error("用户不存在");
             return Result.fail("用户不存在");
         }
+
         // 密码错误
         if (!SecurityUtils.verify(password, userInfo.getPassword())) {
             log.error("密码错误");
