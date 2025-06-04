@@ -6,6 +6,7 @@ import com.example.springblog.demos.web.model.Result;
 import com.example.springblog.demos.web.model.UserInfo;
 import com.example.springblog.demos.web.service.UserService;
 import com.example.springblog.demos.web.utils.JwtUtils;
+import com.example.springblog.demos.web.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -41,7 +42,7 @@ public class UserController {
             return Result.fail("用户不存在");
         }
         // 密码错误
-        if (!password.equals(userInfo.getPassword())) {
+        if (!SecurityUtils.verify(password, userInfo.getPassword())) {
             log.error("密码错误");
             return Result.fail("密码错误");
         }
