@@ -5,7 +5,6 @@ import com.example.springblog.demos.web.model.UserInfo;
 import com.example.springblog.demos.web.model.UserInfoDO;
 import com.example.springblog.demos.web.service.BlogService;
 import com.example.springblog.demos.web.utils.JwtUtils;
-import com.sun.xml.internal.fastinfoset.algorithm.BooleanEncodingAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
