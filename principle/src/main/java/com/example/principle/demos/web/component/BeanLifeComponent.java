@@ -12,7 +12,6 @@ import java.sql.SQLOutput;
 @Component
 public class BeanLifeComponent implements BeanNameAware {
     private Dog singletonDog;
-
     public BeanLifeComponent() {
         System.out.println("执行构造函数...");
     }
@@ -28,16 +27,13 @@ public class BeanLifeComponent implements BeanNameAware {
     public void setBeanName(String s) {
         System.out.println("setBeanName: "+s);
     }
-
     @PostConstruct
     public void init() {
         System.out.println("执行postConstruct方法...");
     }
-
     public void use() {
         System.out.println("执行use方法..");
     }
-
     @PreDestroy
     public void destroy() {
         System.out.println("执行destroy..");

@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class DogController {
     @Autowired
     private Dog singletonDog;
-
     @Autowired
     private ApplicationContext context;
-
     @RequestMapping("/single")
     public String single() {
         // 从context中获取对象
