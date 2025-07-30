@@ -19,7 +19,6 @@ public class MyController {
         redisTemplate.opsForValue().set("key","111");
         redisTemplate.opsForValue().set("key2","222");
         redisTemplate.opsForValue().set("key3","333");
-
         String value = redisTemplate.opsForValue().get("key");
         System.out.println(value);
         return "OK";
