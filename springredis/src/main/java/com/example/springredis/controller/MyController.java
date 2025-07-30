@@ -22,7 +22,6 @@ public class MyController {
 
         String value = redisTemplate.opsForValue().get("key");
         System.out.println(value);
-
         return "OK";
     }
 
