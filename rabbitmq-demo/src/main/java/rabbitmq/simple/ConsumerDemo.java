@@ -1,4 +1,4 @@
-package rabbitmq;
+package rabbitmq.simple;
 
 import com.rabbitmq.client.*;
 

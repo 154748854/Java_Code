@@ -1,21 +1,22 @@
-package rabbitmq;
+package rabbitmq.work;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import rabbitmq.constant.Constants;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-public class ProducerDemo {
+public class Producer {
     public static void main(String[] args) throws IOException, TimeoutException {
         //1. 建立连接
         ConnectionFactory connectionFactory = new ConnectionFactory();
-        connectionFactory.setHost("101.37.182.41");
-        connectionFactory.setPort(5672);
-        connectionFactory.setUsername("study");
-        connectionFactory.setPassword("study");
-        connectionFactory.setVirtualHost("study");
+        connectionFactory.setHost(Constants.HOST);
+        connectionFactory.setPort(Constants.PORT);
+        connectionFactory.setUsername(Constants.USERNAME);
+        connectionFactory.setPassword(Constants.PASSWORD);
+        connectionFactory.setVirtualHost(Constants.VIRTUAL_HOST);
         Connection connection = connectionFactory.newConnection();
         // 2. 开启信道
         Channel channel = connection.createChannel();
@@ -28,7 +29,7 @@ public class ProducerDemo {
          * 是否自动删除
          * argument
          */
-        channel.queueDeclare("hello", true, false, false, null);
+        channel.queueDeclare(Constants.WORK_QUEUE, true, false, false, null);
         // 5. 发送消息
         /**
          * 参数说明:
@@ -37,8 +38,8 @@ public class ProducerDemo {
          * props
          * body:消息
          */
-        String msg = "hello, rabbitmq";
-        channel.basicPublish("","hello", null, msg.getBytes());
+        String msg = "hello, workQueue~";
+        channel.basicPublish("",Constants.WORK_QUEUE, null, msg.getBytes());
         // 6, 进行资源释放
         channel.close();
         connection.close();
