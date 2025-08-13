@@ -39,15 +39,24 @@ public class OrderService {
     }
 
 
+//    public OrderInfo selectOrderById(Integer orderId){
+//        OrderInfo orderInfo = orderMapper.selectOrderById(orderId);
+//        // String url = "http://127.0.0.1:9090/product/"+orderInfo.getProductId();
+//        // 计算轮流的index
+//        int index = count.getAndIncrement() % instances.size();
+//        // 获取实例
+//        String uri = instances.get(index).getUri().toString();
+//        // 凭借url
+//        String url = uri+"/product/"+orderInfo.getProductId();
+//        log.info("远程调用的url:{}", url);
+//        ProductInfo productInfo = restTemplate.getForObject(url, ProductInfo.class);
+//        orderInfo.setProductInfo(productInfo);
+//        return orderInfo;
+//    }
+
     public OrderInfo selectOrderById(Integer orderId){
         OrderInfo orderInfo = orderMapper.selectOrderById(orderId);
-        // String url = "http://127.0.0.1:9090/product/"+orderInfo.getProductId();
-        // 计算轮流的index
-        int index = count.getAndIncrement() % instances.size();
-        // 获取实例
-        String uri = instances.get(index).getUri().toString();
-        // 凭借url
-        String url = uri+"/product/"+orderInfo.getProductId();
+        String url = "http://product-service/product/"+orderInfo.getProductId();
         log.info("远程调用的url:{}", url);
         ProductInfo productInfo = restTemplate.getForObject(url, ProductInfo.class);
         orderInfo.setProductInfo(productInfo);
