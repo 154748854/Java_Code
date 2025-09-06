@@ -33,4 +33,11 @@ public class ProducerController {
         return "发送成功";
     }
 
+    @RequestMapping("/topic/{routingKey}")
+    public String topic(@PathVariable("routingKey") String routingKey) {
+        rabbitTemplate.convertAndSend(Constants.TOPIC_EXCHANGE, routingKey, "hello spring amqp:topic, my routingKey is " +
+                routingKey);
+        return "发送成功";
+    }
+
 }

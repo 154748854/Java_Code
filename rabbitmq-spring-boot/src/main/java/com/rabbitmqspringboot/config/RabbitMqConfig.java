@@ -66,4 +66,30 @@ public class RabbitMqConfig {
     public Binding directQueueBinding3(@Qualifier("directExchange") DirectExchange directExchange,@Qualifier("directQueue2") Queue queue) {
         return BindingBuilder.bind(queue).to(directExchange).with("orange");
     }
+
+    // 通配符模式
+    @Bean("topicQueue1")
+    public Queue topicQueue1() {
+        return QueueBuilder.durable(Constants.TOPIC_QUEUE1).build();
+    }
+    @Bean("topicQueue2")
+    public Queue topicQueue2() {
+        return QueueBuilder.durable(Constants.TOPIC_QUEUE2).build();
+    }
+    @Bean("topicExchange")
+    public TopicExchange topicExchange() {
+        return ExchangeBuilder.directExchange(Constants.TOPIC_EXCHANGE).durable(true).build();
+    }
+    @Bean("topicQueueBinding1")
+    public Binding topicQueueBinding1(@Qualifier("topicExchange") TopicExchange topicExchange,@Qualifier("topicQueue1") Queue queue) {
+        return BindingBuilder.bind(queue).to(topicExchange).with("*.orange.*");
+    }
+    @Bean("topicQueueBinding2")
+    public Binding topicQueueBinding2(@Qualifier("topicExchange") TopicExchange topicExchange,@Qualifier("topicQueue2") Queue queue) {
+        return BindingBuilder.bind(queue).to(topicExchange).with("*.*.rabbit");
+    }
+    @Bean("topicQueueBinding3")
+    public Binding topicQueueBinding3(@Qualifier("topicExchange") TopicExchange topicExchange,@Qualifier("topicQueue2") Queue queue) {
+        return BindingBuilder.bind(queue).to(topicExchange).with("lazy.#");
+    }
 }
