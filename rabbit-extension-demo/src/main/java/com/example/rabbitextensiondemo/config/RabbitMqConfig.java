@@ -48,7 +48,6 @@ public class RabbitMqConfig {
     public Queue confirmQueue() {
         return QueueBuilder.durable(Constants.CONFIRM_QUEUE).build();
     }
-
     @Bean("confirmExchange")
     public Exchange confirmExchange() {
         return ExchangeBuilder.directExchange(Constants.CONFIRM_EXCHANGE).build();
