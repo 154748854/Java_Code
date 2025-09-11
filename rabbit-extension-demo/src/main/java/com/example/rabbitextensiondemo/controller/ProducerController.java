@@ -2,8 +2,10 @@ package com.example.rabbitextensiondemo.controller;
 
 import com.example.rabbitextensiondemo.config.RabbitTemplateConfig;
 import com.example.rabbitextensiondemo.constant.Constants;
+import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageDeliveryMode;
+import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -45,6 +47,29 @@ public class ProducerController {
         CorrelationData correlationData = new CorrelationData("1");
         confirmRabbitTemplate.convertAndSend(Constants.CONFIRM_EXCHANGE, "confirm", "confirm test...", correlationData);
         return "发送成功";
+    }
+
+    @RequestMapping("/returns")
+    public String returns() {
+        CorrelationData correlationData = new CorrelationData("5");
+        confirmRabbitTemplate.convertAndSend(Constants.CONFIRM_EXCHANGE, "confirm", "return test...", correlationData);
+        return "发送成功";
+    }
+
+    @RequestMapping("/retry")
+    public String retry() {
+        rabbitTemplate.convertAndSend(Constants.CONFIRM_EXCHANGE, "retry", "retry test...");
+        return "消息发送成功";
+    }
+
+    @RequestMapping("/ttl")
+    public String ttl() {
+
+        rabbitTemplate.convertAndSend(Constants.TTL_EXCHANGE, "ttl", "ttl test...",message -> {
+            message.getMessageProperties().setExpiration("10000"); // 设置消息过期时间, 单位是ms
+            return message;
+        });
+        return "消息发送成功";
     }
 
 }

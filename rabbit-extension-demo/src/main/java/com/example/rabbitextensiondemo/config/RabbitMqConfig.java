@@ -59,5 +59,35 @@ public class RabbitMqConfig {
         return BindingBuilder.bind(queue).to(exchange).with("confirm").noargs();
     }
 
+    // 重试机制
+    @Bean("retryQueue")
+    public Queue retryQueue() {
+        return QueueBuilder.durable(Constants.RETRY_QUEUE).build();
+    }
 
+    @Bean("retryExchange")
+    public Exchange retryExchange() {
+        return ExchangeBuilder.directExchange(Constants.RETRY_EXCHANGE).build();
+    }
+
+    @Bean("retryBinding")
+    public Binding retryBinding(@Qualifier("retryQueue") Queue queue, @Qualifier("retryExchange") Exchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange).with("retry").noargs();
+    }
+
+    // ttl
+    @Bean("ttlQueue")
+    public Queue ttlQueue() {
+        return QueueBuilder.durable(Constants.TTL_QUEUE).build();
+    }
+
+    @Bean("ttlExchange")
+    public Exchange ttlExchange() {
+        return ExchangeBuilder.directExchange(Constants.TTL_EXCHANGE).build();
+    }
+
+    @Bean("ttlBinding")
+    public Binding ttlBinding(@Qualifier("ttlExchange") Exchange exchange, @Qualifier("ttlQueue") Queue queue) {
+        return BindingBuilder.bind(queue).to(exchange).with("ttl").noargs();
+    }
 }
