@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.retry.stats.ExponentialAverageRetryStatistics;
 
 import java.security.PrivilegedExceptionAction;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class RabbitMqConfig {
@@ -80,14 +82,30 @@ public class RabbitMqConfig {
     public Queue ttlQueue() {
         return QueueBuilder.durable(Constants.TTL_QUEUE).build();
     }
+    // 设置了ttl的队列
+    @Bean("ttlQueue2")
+    public Queue ttlQueue2() {
+        return QueueBuilder.durable(Constants.TTL_QUEUE2).ttl(20000).build();
+    }
+
+    @Bean("ttlQueue2")
+    public Queue ttlQueue3() {
+        Map<String,Object> map = new HashMap<>();
+        map.put("x-message-ttl", 20000);
+        return QueueBuilder.durable(Constants.TTL_QUEUE2).withArguments(map).build();
+    }
 
     @Bean("ttlExchange")
-    public Exchange ttlExchange() {
+    public DirectExchange ttlExchange() {
         return ExchangeBuilder.directExchange(Constants.TTL_EXCHANGE).build();
     }
 
     @Bean("ttlBinding")
     public Binding ttlBinding(@Qualifier("ttlExchange") Exchange exchange, @Qualifier("ttlQueue") Queue queue) {
+        return BindingBuilder.bind(queue).to(exchange).with("ttl").noargs();
+    }
+    @Bean("ttlBinding2")
+    public Binding ttlBinding2(@Qualifier("ttlExchange") Exchange exchange, @Qualifier("ttlQueue2") Queue queue) {
         return BindingBuilder.bind(queue).to(exchange).with("ttl").noargs();
     }
 }

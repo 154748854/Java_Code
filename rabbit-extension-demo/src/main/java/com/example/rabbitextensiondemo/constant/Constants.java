@@ -20,4 +20,11 @@ public class Constants {
     // ttl
     public static final String TTL_QUEUE = "ttl.queue";
     public static final String TTL_EXCHANGE = "ttl.exchange";
+    public static final String TTL_QUEUE2 = "ttl.queue2";
+
+    //DL ttl
+    public static final String NORMAL_QUEUE = "normal.queue";
+    public static final String NORMAL_EXCHANGE = "normal.exchange";
+    public static final String DL_QUEUE = "dl.queue";
+    public static final String DL_EXCHANGE = "dl.exchange";
 }

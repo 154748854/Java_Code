@@ -72,4 +72,10 @@ public class ProducerController {
         return "消息发送成功";
     }
 
+    @RequestMapping("/ttl2")
+    public String ttl2() {
+        rabbitTemplate.convertAndSend(Constants.TTL_EXCHANGE, "ttl", "ttl test...");
+        return "消息发送成功";
+    }
+
 }
