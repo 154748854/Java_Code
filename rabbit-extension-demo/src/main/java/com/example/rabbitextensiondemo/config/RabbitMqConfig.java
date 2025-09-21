@@ -1,6 +1,7 @@
 package com.example.rabbitextensiondemo.config;
 
 import com.example.rabbitextensiondemo.constant.Constants;
+import org.apache.tomcat.util.bcel.Const;
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -107,5 +108,10 @@ public class RabbitMqConfig {
     @Bean("ttlBinding2")
     public Binding ttlBinding2(@Qualifier("ttlExchange") Exchange exchange, @Qualifier("ttlQueue2") Queue queue) {
         return BindingBuilder.bind(queue).to(exchange).with("ttl").noargs();
+    }
+
+    @Bean("transQueue")
+    public Queue transQueue() {
+        return QueueBuilder.durable(Constants.TRANS_QUEUE).build();
     }
 }

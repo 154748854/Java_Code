@@ -11,11 +11,13 @@ import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.concurrent.Callable;
 
 @RequestMapping("/producer")
@@ -25,6 +27,9 @@ public class ProducerController {
     private RabbitTemplate rabbitTemplate;
     @Resource(name = "confirmRabbitTemplate")
     private RabbitTemplate confirmRabbitTemplate;
+
+    @Resource(name = "transRabbitTemplate")
+    private RabbitTemplate transRabbitTemplate;
 
     @RequestMapping("/ack")
     public String ack() {
@@ -78,4 +83,37 @@ public class ProducerController {
         return "消息发送成功";
     }
 
+    @RequestMapping("/delay")
+    public String delay() {
+        System.out.println("delay");
+        rabbitTemplate.convertAndSend(Constants.DELAY_EXCHANGE, "delay", "delay test.... 10s", message -> {
+            message.getMessageProperties().setDelay(10000);
+            return message;
+        });
+
+        rabbitTemplate.convertAndSend(Constants.DELAY_EXCHANGE, "delay", "delay test.... 30s", message -> {
+            message.getMessageProperties().setDelay(30000);
+            return message;
+        });
+
+        System.out.printf("%tc 消息发送成功 \n", new Date());
+        return "消息发送成功";
+    }
+
+    @Transactional
+    @RequestMapping("/trans")
+    public String trans() {
+        System.out.println("trans test...");
+        transRabbitTemplate.convertAndSend("",Constants.TRANS_QUEUE,"trans test 1...");// 使用内置交换机的时候, routingkey要是队列的名称
+        transRabbitTemplate.convertAndSend("",Constants.TRANS_QUEUE,"trans test 2...");// 使用内置交换机的时候, routingkey要是队列的名称
+        return "消息发送成功";
+    }
+
+    @RequestMapping("/qos")
+    public String qos() {
+        for (int i = 0; i < 20; i++) {
+            rabbitTemplate.convertAndSend(Constants.TTL_EXCHANGE, "qos", "qos test..."+i);
+        }
+        return "消息发送成功";
+    }
 }
