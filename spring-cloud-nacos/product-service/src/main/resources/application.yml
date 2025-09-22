@@ -10,6 +10,7 @@ spring:
     nacos:
       discovery:
         server-addr: 101.37.182.41:8848
+        cluster-name: BJ
   application:
     name: product-service
 # 设置 Mybatis 的 xml 保存路径

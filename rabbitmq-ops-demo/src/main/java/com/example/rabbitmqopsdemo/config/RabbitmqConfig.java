@@ -11,4 +11,9 @@ public class RabbitmqConfig {
     public Queue quorumQueue() {
         return QueueBuilder.durable("quorum.queue").quorum().build();
     }
+
+    @Bean("clusterQueue")
+    public Queue clusterQueue() {
+        return QueueBuilder.durable("cluster.queue").quorum().build();
+    }
 }

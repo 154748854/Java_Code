@@ -16,4 +16,10 @@ public class ProducerController {
         rabbitTemplate.convertAndSend("", "quorum.queue", "quorum test...");
         return "消息发送成功";
     }
+
+    @RequestMapping("/haproxy")
+    public String haproxy() {
+        rabbitTemplate.convertAndSend("", "cluster.queue", "haproxy test...");
+        return "消息发送成功";
+    }
 }

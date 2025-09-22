@@ -12,6 +12,10 @@ spring:
     nacos:
       discovery:
         server-addr: 101.37.182.41:8848
+        cluster-name: BJ
+    loadbalancer:
+      nacos:
+        enabled: true
 # 设置 Mybatis 的 xml 保存路径
 mybatis:
   configuration: # 配置打印 MyBatis 执行的 SQL
