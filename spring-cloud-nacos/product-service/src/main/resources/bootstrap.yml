@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: product-service #和nacos中配置文件的名字保持一致
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 101.37.182.41:8848
+        namespace: 724c453e-41e9-40da-9229-786eb826ff8c
